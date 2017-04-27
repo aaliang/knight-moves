@@ -1,0 +1,6 @@
+[package]
+name = "knight-moves"
+version = "0.1.0"
+authors = ["andy liang <andy.liang@indicative.com>"]
+
+[dependencies]
