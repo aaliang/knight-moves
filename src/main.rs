@@ -256,8 +256,6 @@ fn get_region_map(regions: &Vec<Vec<Position>>) -> [usize; BOARD_WIDTH*BOARD_HEI
     blank
 }
 
-use std::collections::HashMap;
-
 /// Given an input of Gamestates, return paths to the destination that are possible within {moves_left}
 /// moves
 fn paths_to(mut states: Vec<GameState>, destination: &Position, moves_left: usize) -> Vec<GameState> {
@@ -335,26 +333,14 @@ fn main() {
             }
         }
 
-        let mut hm = HashMap::with_capacity(vec.len());
-
-        for gs in vec.iter() {
-            hm.insert((gs.board.clone(), gs.current_position.clone()), gs);
-        }
-
-        let mut filt_vec = Vec::with_capacity(hm.len());
-
-        for (_, v) in hm.into_iter() {
-            filt_vec.push(v.to_owned());
-        }
-
-        for (_, p) in filt_vec.iter().enumerate() {
+        for (_, p) in vec.iter().enumerate() {
             if p.check() {
                 println!("bingo!");
                 p.print_board();
                 return;
             }
         }
-        flows = filt_vec;
+        flows = vec;
     }
 }
 
